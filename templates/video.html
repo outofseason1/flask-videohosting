@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{{video['title']}}{% endblock %}
+
+{% block body %}
+
+<div class="video">
+<video controls width="1280" height="720">
+    <source src="{{ url_for('usevideo') }}" type="video/mp4">
+</video>
+    <h1>{{video['title']}}</h1>
+    <p>{{video['description']}}</p>
+    <p>{{video['date']}}</p>
+</div>
+
+{% endblock %}

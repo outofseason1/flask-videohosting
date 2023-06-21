@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Поиск..{% endblock %}
+
+{% block body %}
+
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}" align="center">{{msg}}</div>
+{% endfor %}
+
+<div class="search-container">
+  <form action="/search" method="post">
+    <input type="text" placeholder="Поиск.." name="search">
+    <button type="submit"><i class="fa fa-search"></i></button>
+  </form>
+</div>
+
+{% if videos == '' %}
+
+{% elif videos == 'Видео не найдено' %}
+
+  <h1>Мы не смогли найти видео по вашему запросу "{{whats}}"</h1>
+
+{% else %}
+
+<ul class="grid">
+    {% for video in videos %}
+   <li class="none">
+       <a href="video/{{video['id']}}"><img src="https://pic.rutubelist.ru/video/d0/4b/d04bbf6d383959de4fa6d7bc8c792197.jpg" alt="popa" width="300px" height="200px">
+           <h3>{{ video['title'] }}</h3></a>
+       <p>{{ video['date'] }}
+   </li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+{% endblock %}

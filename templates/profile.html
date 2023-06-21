@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}{{username}}{% endblock %}
+
+{% block body %}
+
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}" align="center">{{msg}}</div>
+{% endfor %}
+
+<table border="0" class="profile-table">
+    <tr><td valign="top">
+        <div class="profile-ava"><img src="{{url_for('userava')}}"></div>
+        <div class="profile-load">
+        <form action="{{url_for('uploadava')}}"  method="POST" enctype="multipart/form-data">
+            <p><input type="file" name="file"></p>
+            <p><input type="submit" value="Загрузить"></p>
+            </form>
+        </div>
+        </td>
+        <td valign="top" class="profile-panel">
+            <a href="/logout"><button class="button" type="button">Выйти из аккаунта</button></a>
+            <ul class="profile-info">
+                <li>Имя: {{ current_user.getName() }}</li>
+                <li>Почта: {{ current_user.getEmail() }}</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<hr>
+<h3 align="center">Ваши видео:</h3>
+
+<ul class="grid">
+    {% for video in videos %}
+   <li class="none">
+       <a href="video/{{video['id']}}"><img src="https://pic.rutubelist.ru/video/d0/4b/d04bbf6d383959de4fa6d7bc8c792197.jpg" alt="popa" width="300px" height="200px">
+           <h3>{{ video['title'] }}</h3></a>
+       <p>{{ video['date'] }}
+   </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

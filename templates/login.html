@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block body %}
+
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}" align="center">{{msg}}</div>
+{% endfor %}
+
+<form action="/login" method="post" class="form_log">
+<p align="center" class="less_left"><label>Логин </label> <input name="username" required type="text" value="" /></p>
+    <p align="center" class="left"><label>Пароль </label> <input name="password" required type="text" value="" /></p>
+    <p align="center">Запомнить меня <input type="checkbox" name="remainme"></p>
+    <hr align="center" width="590px">
+    <p align="center">Нет аккаунта? <a href="{{url_for('registration')}}">Зарегистрироваться</a></p>
+    <p align="center"><input type="submit" value="Войти"></p>
+</form>
+
+{% endblock %}
